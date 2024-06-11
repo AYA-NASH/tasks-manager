@@ -1,7 +1,6 @@
-package com.example.Task.Management.Controller;
-import com.example.Task.Management.Entity.TaskEntity;
-import com.example.Task.Management.Service.TaskService;
-import com.example.Task.Management.Service.TaskServiceInterface;
+package com.ropulva.taskmanager.controller;
+import com.ropulva.taskmanager.service.TaskService;
+import com.ropulva.taskmanager.controller.dto.TaskDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +12,10 @@ import java.util.List;
 @RequestMapping("/api/tasks")
 public class TaskController {
 
-    private final TaskServiceInterface taskService;
+    private final TaskService taskService;
 
     @Autowired
-    public TaskController(TaskServiceInterface taskService) {
+    public TaskController(TaskService taskService) {
         this.taskService = taskService;
     }
 

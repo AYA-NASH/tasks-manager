@@ -8,11 +8,11 @@
 		<version>3.3.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>Task-Management</artifactId>
+	<groupId>com.ropulva</groupId>
+	<artifactId>TasksManager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Task-Management</name>
-	<description>Simple Task management app</description>
+	<name>TasksManager</name>
+	<description>Simple tasks management app</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

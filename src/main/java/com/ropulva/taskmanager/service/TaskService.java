@@ -1,9 +1,8 @@
-package com.example.Task.Management.Service;
-import com.example.Task.Management.Controller.TaskDTO;
-import com.example.Task.Management.Repository.TaskRepositoryInterface;
+package com.ropulva.taskmanager.service;
+import com.ropulva.taskmanager.controller.dto.TaskDTO;
+import com.ropulva.taskmanager.repository.TaskRepository;
+import com.ropulva.taskmanager.repository.Entity.TaskEntity;
 import org.springframework.stereotype.Service;
-
-import com.example.Task.Management.Entity.TaskEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,16 +10,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class TaskService implements TaskServiceInterface {
+public class TaskService{
 
-    private final TaskRepositoryInterface taskRepository;
+    private final TaskRepository taskRepository;
 
     @Autowired
-    public TaskService(TaskRepositoryInterface taskRepository) {
+    public TaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
     }
 
-    @Override
+
     public List<TaskDTO> getAllTasks() {
         return taskRepository.findAll().stream()
                 .map(this::convertToTaskDTO)
@@ -36,7 +35,6 @@ public class TaskService implements TaskServiceInterface {
 //        return convertToTaskDTO(task);
 //    }
 
-    @Override
     public TaskDTO createTask(TaskDTO taskDTO) {
         TaskEntity taskEntity = convertToEntity(taskDTO);
         TaskEntity savedTask = taskRepository.save(taskEntity);

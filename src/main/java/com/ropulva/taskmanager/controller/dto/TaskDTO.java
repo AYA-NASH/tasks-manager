@@ -1,16 +1,16 @@
-package com.example.Task.Management.Entity;
+package com.ropulva.taskmanager.controller.dto;
 
 import java.time.LocalDate;
 
-public class TaskEntity {
+public class TaskDTO {
     private Long id;
     private String name;
     private String description;
     private LocalDate date;
 
-    public TaskEntity() {}
+    public TaskDTO() {}
 
-    public TaskEntity(Long id, String name, String description, LocalDate date) {
+    public TaskDTO(Long id, String name, String description, LocalDate date) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -43,9 +43,5 @@ public class TaskEntity {
 
     public LocalDate getDate() {
         return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
     }
 }

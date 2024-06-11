@@ -1,11 +1,11 @@
-package com.example.Task.Management.Repository;
+package com.ropulva.taskmanager.repository;
 
-import com.example.Task.Management.Entity.TaskEntity;
+import com.ropulva.taskmanager.repository.Entity.TaskEntity;
 
 import java.util.List;
 
 
-public interface TaskRepositoryInterface {
+public interface TaskRepository {
     List<TaskEntity> findAll();
     TaskEntity findById(Long id);
     TaskEntity save(TaskEntity task);

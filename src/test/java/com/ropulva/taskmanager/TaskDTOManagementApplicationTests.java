@@ -1,4 +1,4 @@
-package com.example.Task.Management;
+package com.ropulva.taskmanager;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

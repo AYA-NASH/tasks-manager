@@ -1,6 +1,6 @@
-package com.example.Task.Management.Repository;
+package com.ropulva.taskmanager.repository;
 
-import com.example.Task.Management.Entity.TaskEntity;
+import com.ropulva.taskmanager.repository.Entity.TaskEntity;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class TaskRepository implements TaskRepositoryInterface {
+public class InMemoryTaskRepository implements TaskRepository {
     private final Map<Long, TaskEntity> tasks = new HashMap<>();
     private long nextId = 1;
 
