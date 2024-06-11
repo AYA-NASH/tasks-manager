@@ -17,40 +17,23 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
 
-    private final TaskMapper taskMapper;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository, TaskMapper taskMapper) {
+    public TaskService(TaskRepository taskRepository) {
         this.taskRepository = taskRepository;
-        this.taskMapper = taskMapper;
     }
 
     public List<TaskDTO> getAllTasks() {
-        return taskRepository.findAll().stream()
-                .map(taskMapper::taskToTaskDTO)
+        List<Task> tasks = (List<Task>) taskRepository.findAll();
+        return tasks.stream()
+                .map(TaskMapper.INSTANCE::taskToTaskDTO)
                 .collect(Collectors.toList());
     }
 
     public TaskDTO createTask(TaskDTO taskDTO) {
-        Task task = taskMapper.taskDTOToTask(taskDTO);
+        Task task = TaskMapper.INSTANCE.taskDTOToTask(taskDTO);
         Task createdTask = taskRepository.save(task);
-        return taskMapper.taskToTaskDTO(createdTask);
+        return TaskMapper.INSTANCE.taskToTaskDTO(createdTask);
     }
-
-    public TaskDTO getTaskById(String id) {
-        Task task = taskRepository.findById(id);
-        return taskMapper.taskToTaskDTO(task);
-    }
-
-    public TaskDTO updateTask(String id, TaskDTO taskDTO) {
-        Task task = taskMapper.taskDTOToTask(taskDTO);
-        Task updatedTask = taskRepository.save(task);
-        return taskMapper.taskToTaskDTO(updatedTask);
-    }
-
-    public void deleteTask(String id) {
-        taskRepository.deleteById(id);
-    }
-
 
 }
