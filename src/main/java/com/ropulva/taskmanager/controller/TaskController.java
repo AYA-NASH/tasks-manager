@@ -9,8 +9,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/tasks")
-public class TaskController {
+public class TaskController implements TaskApi {
 
     private final TaskService taskService;
 
@@ -19,33 +18,31 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping
+    @Override
     public ResponseEntity<List<TaskDTO>> getAllTasks() {
         List<TaskDTO> tasks = taskService.getAllTasks();
         return ResponseEntity.ok(tasks);
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<TaskDTO> getTaskById(@PathVariable Long id) {
-//        TaskDTO task = taskService.getTaskById(id);
-//        return ResponseEntity.ok(task);
-//    }
-//
-    @PostMapping
+    @Override
+    public ResponseEntity<TaskDTO> getTaskById(String id) {
+        return null;
+    }
+
+    @Override
     public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO) {
         TaskDTO createdTask = taskService.createTask(taskDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
+
     }
-//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<TaskDTO> updateTask(@PathVariable Long id, @RequestBody TaskDTO taskDTO) {
-//        TaskDTO updatedTask = taskService.updateTask(id, taskDTO);
-//        return ResponseEntity.ok(updatedTask);
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
-//        taskService.deleteTask(id);
-//        return ResponseEntity.noContent().build();
-//    }
+
+    @Override
+    public ResponseEntity<TaskDTO> updateTask(String id, TaskDTO taskDTO) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteTask(String id) {
+        return null;
+    }
 }

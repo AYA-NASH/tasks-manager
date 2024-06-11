@@ -1,6 +1,6 @@
 package com.ropulva.taskmanager.repository;
 
-import com.ropulva.taskmanager.repository.Entity.TaskEntity;
+import com.ropulva.taskmanager.repository.entity.Task;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -10,30 +10,32 @@ import java.util.Map;
 
 @Repository
 public class InMemoryTaskRepository implements TaskRepository {
-    private final Map<Long, TaskEntity> tasks = new HashMap<>();
+    private final Map<String, Task> tasks = new HashMap<>();
     private long nextId = 1;
 
     @Override
-    public List<TaskEntity> findAll() {
+    public List<Task> findAll() {
         return new ArrayList<>(tasks.values());
     }
 
     @Override
-    public TaskEntity findById(Long id) {
+    public Task findById(String id) {
         return tasks.get(id);
     }
 
     @Override
-    public TaskEntity save(TaskEntity task) {
-        if (task.getId() == null) {
-            task.setId(nextId++);
-        }
-        tasks.put(task.getId(), task);
-        return task;
+    public Task save(Task task) {
+//        if (task.getId() == null) {
+//            Integer.valueOf(task.getId());
+//            task.setId(nextId++);
+//        }
+//        tasks.put(task.getId(), task);
+//        return task;
+        return null;
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteById(String id) {
         tasks.remove(id);
     }
 }
