@@ -31,9 +31,26 @@ public class TaskService {
     }
 
     public TaskDTO createTask(TaskDTO taskDTO) {
+        System.out.println("taskDTO" + taskDTO);
         Task task = TaskMapper.INSTANCE.taskDTOToTask(taskDTO);
         Task createdTask = taskRepository.save(task);
         return TaskMapper.INSTANCE.taskToTaskDTO(createdTask);
     }
+
+    public TaskDTO getTaskById(Long id) {
+        Task task = taskRepository.findById(id).orElse(null);
+        return TaskMapper.INSTANCE.taskToTaskDTO(task);
+    }
+
+    public TaskDTO updateTask(Long id, TaskDTO taskDTO) {
+        Task task = TaskMapper.INSTANCE.taskDTOToTask(taskDTO);
+        Task updatedTask = taskRepository.save(task);
+        return TaskMapper.INSTANCE.taskToTaskDTO(updatedTask);
+    }
+
+    public void deleteTask(Long id) {
+        taskRepository.deleteById(id);
+    }
+
 
 }

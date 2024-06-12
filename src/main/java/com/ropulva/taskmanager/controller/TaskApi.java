@@ -12,15 +12,15 @@ public interface TaskApi {
     public ResponseEntity<List<TaskDTO>> getAllTasks();
 
     @GetMapping("/{id}")
-    public ResponseEntity<TaskDTO> getTaskById(String id);
+    public ResponseEntity<TaskDTO> getTaskById(Long id);
 
-    @PostMapping
-    public ResponseEntity<TaskDTO> createTask(TaskDTO taskDTO);
+    @PostMapping(consumes = "application/json", produces = "application/json")
+    public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO);
 
     @PutMapping("/{id}")
-    public ResponseEntity<TaskDTO> updateTask(String id, TaskDTO taskDTO);
+    public ResponseEntity<TaskDTO> updateTask(Long id, TaskDTO taskDTO);
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTask(String id);
+    public ResponseEntity<Void> deleteTask(Long id);
 
 }

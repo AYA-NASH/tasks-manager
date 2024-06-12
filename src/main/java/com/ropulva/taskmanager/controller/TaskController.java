@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/tasks")
 public class TaskController implements TaskApi {
 
     private final TaskService taskService;
@@ -25,7 +26,7 @@ public class TaskController implements TaskApi {
     }
 
     @Override
-    public ResponseEntity<TaskDTO> getTaskById(String id) {
+    public ResponseEntity<TaskDTO> getTaskById(@PathVariable Long id) {
         return null;
     }
 
@@ -33,16 +34,15 @@ public class TaskController implements TaskApi {
     public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO) {
         TaskDTO createdTask = taskService.createTask(taskDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
-
     }
 
     @Override
-    public ResponseEntity<TaskDTO> updateTask(String id, TaskDTO taskDTO) {
+    public ResponseEntity<TaskDTO> updateTask(@PathVariable Long id, @RequestBody TaskDTO taskDTO) {
         return null;
     }
 
     @Override
-    public ResponseEntity<Void> deleteTask(String id) {
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         return null;
     }
 }
