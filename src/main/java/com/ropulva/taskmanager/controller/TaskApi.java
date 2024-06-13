@@ -1,6 +1,7 @@
 package com.ropulva.taskmanager.controller;
 
 import com.ropulva.taskmanager.controller.dto.TaskDTO;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +15,7 @@ public interface TaskApi {
     @GetMapping("/{id}")
     public ResponseEntity<TaskDTO> getTaskById(Long id);
 
-    @PostMapping(consumes = "application/json", produces = "application/json")
+    @PostMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO);
 
     @PutMapping("/{id}")

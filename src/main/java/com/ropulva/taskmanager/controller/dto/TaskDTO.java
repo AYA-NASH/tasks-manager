@@ -1,11 +1,8 @@
 package com.ropulva.taskmanager.controller.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.*;
 
 @Getter
 @Setter
@@ -13,6 +10,12 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class TaskDTO {
     private Long id;
+
+    @NonNull
+    @JsonProperty("name")
     private String name;
+
+    @NonNull
+    @JsonProperty("description")
     private String description;
 }
