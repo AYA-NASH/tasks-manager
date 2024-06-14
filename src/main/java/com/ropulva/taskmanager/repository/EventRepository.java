@@ -1,7 +1,9 @@
 package com.ropulva.taskmanager.repository;
 
-import com.ropulva.taskmanager.repository.entity.Event;
+import com.ropulva.taskmanager.repository.entity.GoogleCalendarEvent;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface EventRepository extends CrudRepository<Event, Long> {
+@Repository
+public interface EventRepository extends CrudRepository<GoogleCalendarEvent, Long> {
 }

@@ -1,14 +1,16 @@
 package com.ropulva.taskmanager.service;
 
+import com.google.api.client.util.DateTime;
+import com.google.api.services.calendar.model.Event;
+import com.google.api.services.calendar.model.EventDateTime;
 import com.ropulva.taskmanager.controller.dto.TaskDTO;
 import com.ropulva.taskmanager.mappers.TaskMapper;
 import com.ropulva.taskmanager.repository.TaskRepository;
 import com.ropulva.taskmanager.repository.entity.Task;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,11 +18,12 @@ import java.util.stream.Collectors;
 public class TaskService {
 
     private final TaskRepository taskRepository;
-
+    private final GoogleCalendarService googleCalendarService;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository) {
+    public TaskService(TaskRepository taskRepository, GoogleCalendarService googleCalendarService) {
         this.taskRepository = taskRepository;
+        this.googleCalendarService = googleCalendarService;
     }
 
     public List<TaskDTO> getAllTasks() {
@@ -30,9 +33,21 @@ public class TaskService {
                 .collect(Collectors.toList());
     }
 
-    public TaskDTO createTask(TaskDTO taskDTO) {
-
+    public TaskDTO createTask(TaskDTO taskDTO) throws IOException {
         Task task = TaskMapper.INSTANCE.taskDTOToTask(taskDTO);
+
+
+        // CREATE GOOGLE CALENDAR EVENT
+        // TODO: Should be done like a transaction
+        Event taskEvent = new Event();
+
+        taskEvent.setSummary(task.getName());
+        taskEvent.setDescription(task.getDescription());
+        taskEvent.setStart(new EventDateTime().setDateTime(new DateTime(task.getStartDate().toString())));
+        taskEvent.setEnd(new EventDateTime().setDateTime(new DateTime(task.getEndDate().toString())));
+
+        googleCalendarService.createEvent(taskEvent);
+
         Task createdTask = taskRepository.save(task);
         return TaskMapper.INSTANCE.taskToTaskDTO(createdTask);
     }

@@ -11,12 +11,12 @@ public interface TaskMapper {
 
 
     default TaskDTO taskToTaskDTO(Task task) {
-        return new TaskDTO(task.getId(), task.getName(), task.getDescription());
+        return new TaskDTO(task.getId(), task.getName(), task.getDescription(), task.getStartDate(), task.getEndDate());
     }
 
 
     default Task taskDTOToTask(TaskDTO taskDTO) {
-        return new Task(taskDTO.getId(), taskDTO.getName(), taskDTO.getDescription());
+        return new Task(taskDTO.getId(), taskDTO.getName(), taskDTO.getDescription(), taskDTO.getStartDate(), taskDTO.getEndDate());
     }
 
 }
