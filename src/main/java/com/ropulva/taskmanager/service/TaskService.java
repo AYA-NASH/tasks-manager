@@ -31,20 +31,27 @@ public class TaskService {
     }
 
     public TaskDTO createTask(TaskDTO taskDTO) {
-        System.out.println("taskDTO" + taskDTO);
+
         Task task = TaskMapper.INSTANCE.taskDTOToTask(taskDTO);
         Task createdTask = taskRepository.save(task);
         return TaskMapper.INSTANCE.taskToTaskDTO(createdTask);
     }
 
     public TaskDTO getTaskById(Long id) {
-        Task task = taskRepository.findById(id).orElse(null);
+        Task task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
         return TaskMapper.INSTANCE.taskToTaskDTO(task);
     }
 
     public TaskDTO updateTask(Long id, TaskDTO taskDTO) {
-        Task task = TaskMapper.INSTANCE.taskDTOToTask(taskDTO);
-        Task updatedTask = taskRepository.save(task);
+        Task existingTask = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+        if (taskDTO.getName() != null) {
+            existingTask.setName(taskDTO.getName());
+        }
+        if (taskDTO.getDescription() != null) {
+            existingTask.setDescription(taskDTO.getDescription());
+        }
+
+        Task updatedTask = taskRepository.save(existingTask);
         return TaskMapper.INSTANCE.taskToTaskDTO(updatedTask);
     }
 

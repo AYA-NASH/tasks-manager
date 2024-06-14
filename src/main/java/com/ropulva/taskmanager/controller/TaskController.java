@@ -26,23 +26,26 @@ public class TaskController implements TaskApi {
     }
 
     @Override
-    public ResponseEntity<TaskDTO> getTaskById(@PathVariable Long id) {
-        return null;
+    public ResponseEntity<TaskDTO> getTaskById(Long id) {
+        TaskDTO task = taskService.getTaskById(id);
+        return ResponseEntity.ok(task);
     }
 
     @Override
-    public ResponseEntity<TaskDTO> createTask(@RequestBody TaskDTO taskDTO) {
+    public ResponseEntity<TaskDTO> createTask(TaskDTO taskDTO) {
         TaskDTO createdTask = taskService.createTask(taskDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
     }
 
     @Override
-    public ResponseEntity<TaskDTO> updateTask(@PathVariable Long id, @RequestBody TaskDTO taskDTO) {
-        return null;
+    public ResponseEntity<TaskDTO> updateTask(Long id, TaskDTO taskDTO) {
+        TaskDTO updatedTask = taskService.updateTask(id, taskDTO);
+        return ResponseEntity.ok(updatedTask);
     }
 
     @Override
-    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
-        return null;
+    public ResponseEntity<Void> deleteTask(Long id) {
+        taskService.deleteTask(id);
+        return ResponseEntity.noContent().build();
     }
 }
