@@ -37,4 +37,4 @@ The app is written in Java using Spring Boot and PostgreSQL as the database.
 ### Usage:
 - Run postegres on localhost and the same default port 5432
 - Update the credientials if necessary in the application properties. 
-- Run the app! 
+- Run the app 🎉
