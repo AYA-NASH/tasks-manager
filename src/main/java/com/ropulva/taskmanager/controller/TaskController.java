@@ -33,6 +33,12 @@ public class TaskController implements TaskApi {
     }
 
     @Override
+    public ResponseEntity<List<TaskDTO>> getTasksByName(String name) {
+        List<TaskDTO> tasks = taskService.getTasksByName(name);
+        return ResponseEntity.ok(tasks);
+    }
+
+    @Override
     public ResponseEntity<TaskDTO> createTask(TaskDTO taskDTO) throws IOException {
         TaskDTO createdTask = taskService.createTask(taskDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdTask);
@@ -40,13 +46,45 @@ public class TaskController implements TaskApi {
 
     @Override
     public ResponseEntity<TaskDTO> updateTask(Long id, TaskDTO taskDTO) {
-        TaskDTO updatedTask = taskService.updateTask(id, taskDTO);
+        TaskDTO updatedTask = null;
+        try {
+            updatedTask = taskService.updateTask(id, taskDTO);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return ResponseEntity.ok(updatedTask);
+    }
+
+    @Override
+    public ResponseEntity<TaskDTO> updateTasksByName(String name, TaskDTO taskDTO) {
+        TaskDTO updatedTask = null;
+        try {
+            updatedTask = taskService.updateTasksByName(name, taskDTO);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return ResponseEntity.ok(updatedTask);
     }
 
     @Override
     public ResponseEntity<Void> deleteTask(Long id) {
-        taskService.deleteTask(id);
+        try {
+            taskService.deleteTask(id);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteTasksByName(String name) {
+        taskService.deleteTasksByName(name);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteAllTasks() {
+        taskService.deleteAllTasks();
         return ResponseEntity.noContent().build();
     }
 }

@@ -1,0 +1,308 @@
+{
+	"id": "31039724-6d28-45de-aef9-a2d9893be616",
+	"name": "Task Management API",
+	"timestamp": "2024-06-25T13:31:39.177Z",
+	"collection_id": "28552717-6ca8cf46-c705-4aa2-b708-7b93fb985760",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-06-25T13:31:20.246Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "221fcf9e-cf38-4ebb-9c43-eef955459d6d",
+			"name": "task_1",
+			"url": "http://localhost:8080/api/tasks/create",
+			"time": 4701,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				4701
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b45dc4b2-0c11-4139-8f60-cd064e9bd524",
+			"name": "task_2",
+			"url": "http://localhost:8080/api/tasks/create",
+			"time": 911,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				911
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "8cd98386-8d98-4c08-ab1d-849df03cc39d",
+			"name": "task_3",
+			"url": "http://localhost:8080/api/tasks/create",
+			"time": 775,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				775
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "9d7bb3dd-12e6-480e-9343-8038bf8a8764",
+			"name": "task_4",
+			"url": "http://localhost:8080/api/tasks/create",
+			"time": 793,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				793
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "6c655ada-daac-40cc-88ab-be8ab5a14ece",
+			"name": "task_5",
+			"url": "http://localhost:8080/api/tasks/create",
+			"time": 888,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				888
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "5ef2548c-2eb0-4e68-9d6c-055a032f0645",
+			"name": "task_6",
+			"url": "http://localhost:8080/api/tasks/create",
+			"time": 889,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				889
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "eceb5e32-6ce2-4e7a-ba77-91d74aa6701a",
+			"name": "task_7",
+			"url": "http://localhost:8080/api/tasks/create",
+			"time": 903,
+			"responseCode": {
+				"code": 201,
+				"name": "Created"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				903
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "25fbe763-2041-4c04-a6f2-10215c97d7af",
+			"name": "get meetings tasks",
+			"url": "http://localhost:8080/api/tasks?name=Team Meeting",
+			"time": 255,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				255
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b9bb91f9-9fbe-48a6-9b0f-b5138d8bd01e",
+			"name": "update task time",
+			"url": "http://localhost:8080/api/tasks?name=Write Documentation",
+			"time": 1261,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				1261
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "b9b91548-0df8-4365-bee8-e90c82295493",
+			"name": "update description",
+			"url": "http://localhost:8080/api/tasks/1",
+			"time": 1176,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				1176
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "473b1a80-b2e9-4d47-be24-0aa71b3c1be4",
+			"name": "get tasks",
+			"url": "http://localhost:8080/api/tasks",
+			"time": 26,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				26
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "931542d4-0ed7-44b6-b4e7-ce1c2b6fd865",
+			"name": "delete Team Meetings",
+			"url": "http://localhost:8080/api/tasks?name=Team Meeting",
+			"time": 1604,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				1604
+			],
+			"allTests": [
+				{}
+			]
+		},
+		{
+			"id": "d7910483-9e11-4c04-83c1-af5286bcaebb",
+			"name": "delete all",
+			"url": "http://localhost:8080/api/tasks/deleteAll",
+			"time": 3612,
+			"responseCode": {
+				"code": 204,
+				"name": "No Content"
+			},
+			"tests": {},
+			"testPassFailCounts": {},
+			"times": [
+				3612
+			],
+			"allTests": [
+				{}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 17794,
+	"collection": {
+		"requests": [
+			{
+				"id": "221fcf9e-cf38-4ebb-9c43-eef955459d6d",
+				"method": "POST"
+			},
+			{
+				"id": "b45dc4b2-0c11-4139-8f60-cd064e9bd524",
+				"method": "POST"
+			},
+			{
+				"id": "8cd98386-8d98-4c08-ab1d-849df03cc39d",
+				"method": "POST"
+			},
+			{
+				"id": "9d7bb3dd-12e6-480e-9343-8038bf8a8764",
+				"method": "POST"
+			},
+			{
+				"id": "6c655ada-daac-40cc-88ab-be8ab5a14ece",
+				"method": "POST"
+			},
+			{
+				"id": "5ef2548c-2eb0-4e68-9d6c-055a032f0645",
+				"method": "POST"
+			},
+			{
+				"id": "eceb5e32-6ce2-4e7a-ba77-91d74aa6701a",
+				"method": "POST"
+			},
+			{
+				"id": "25fbe763-2041-4c04-a6f2-10215c97d7af",
+				"method": "GET"
+			},
+			{
+				"id": "b9bb91f9-9fbe-48a6-9b0f-b5138d8bd01e",
+				"method": "PUT"
+			},
+			{
+				"id": "b9b91548-0df8-4365-bee8-e90c82295493",
+				"method": "PUT"
+			},
+			{
+				"id": "473b1a80-b2e9-4d47-be24-0aa71b3c1be4",
+				"method": "GET"
+			},
+			{
+				"id": "931542d4-0ed7-44b6-b4e7-ce1c2b6fd865",
+				"method": "DELETE"
+			},
+			{
+				"id": "d7910483-9e11-4c04-83c1-af5286bcaebb",
+				"method": "DELETE"
+			}
+		]
+	}
+}

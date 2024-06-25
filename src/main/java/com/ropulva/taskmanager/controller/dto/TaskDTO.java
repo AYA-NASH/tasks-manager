@@ -13,6 +13,8 @@ import java.time.LocalDateTime;
 public class TaskDTO {
     private Long id;
 
+    private String eventId;
+
     @NonNull
     @JsonProperty("name")
     private String name;

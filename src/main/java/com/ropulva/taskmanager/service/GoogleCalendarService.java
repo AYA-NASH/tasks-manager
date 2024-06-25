@@ -53,10 +53,11 @@ public class GoogleCalendarService {
         }
     }
 
-    public void createEvent(Event event) throws IOException {
+    public Event createEvent(Event event) throws IOException {
         String calendarId = createOrGetCalendarId();
         Event createdEvent = calendarService.events().insert(calendarId, event).execute();
         saveEventToDatabase(createdEvent);
+        return createdEvent;
     }
 
     public Event getEvent(String eventId) throws IOException {

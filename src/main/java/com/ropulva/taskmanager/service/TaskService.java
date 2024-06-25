@@ -53,7 +53,8 @@ public class TaskService {
         taskEvent.setStart(new EventDateTime().setDateTime(new DateTime(String.valueOf(startDateTime))));
         taskEvent.setEnd(new EventDateTime().setDateTime(new DateTime(String.valueOf(endDateTime))));
 
-        googleCalendarService.createEvent(taskEvent);
+        Event createdEvent = googleCalendarService.createEvent(taskEvent);
+        task.setEventId(createdEvent.getId());
 
         Task createdTask = taskRepository.save(task);
         return TaskMapper.INSTANCE.taskToTaskDTO(createdTask);
@@ -64,21 +65,104 @@ public class TaskService {
         return TaskMapper.INSTANCE.taskToTaskDTO(task);
     }
 
-    public TaskDTO updateTask(Long id, TaskDTO taskDTO) {
+    public List<TaskDTO> getTasksByName(String name) {
+
+        List<Task> tasks = taskRepository.findByName(name);
+        return tasks.stream()
+                .map(TaskMapper.INSTANCE::taskToTaskDTO)
+                .collect(Collectors.toList());
+    }
+
+    public TaskDTO updateTask(Long id, TaskDTO taskDTO) throws IOException {
         Task existingTask = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+        Event existingEvent = googleCalendarService.getEvent(existingTask.getEventId());
         if (taskDTO.getName() != null) {
             existingTask.setName(taskDTO.getName());
+            existingEvent.setSummary(taskDTO.getName());
         }
         if (taskDTO.getDescription() != null) {
             existingTask.setDescription(taskDTO.getDescription());
+            existingEvent.setDescription(taskDTO.getDescription());
+        }
+        if (taskDTO.getStartDate() != null) {
+            existingTask.setStartDate(taskDTO.getStartDate());
+            existingEvent.setStart(new EventDateTime().setDateTime(new DateTime(taskDTO.getStartDate().toString())));
+        }
+        if (taskDTO.getEndDate() != null) {
+            existingTask.setEndDate(taskDTO.getEndDate());
+            existingEvent.setEnd(new EventDateTime().setDateTime(new DateTime(taskDTO.getEndDate().toString())));
         }
 
         Task updatedTask = taskRepository.save(existingTask);
+        googleCalendarService.updateEvent(existingTask.getEventId(), existingEvent);
         return TaskMapper.INSTANCE.taskToTaskDTO(updatedTask);
     }
 
-    public void deleteTask(Long id) {
+     public TaskDTO updateTasksByName(String name, TaskDTO taskDTO) throws IOException {
+          List<Task> tasks = taskRepository.findByName(name);
+          Event existingEvent = googleCalendarService.getEvent(tasks.get(0).getEventId());
+          if (taskDTO.getName() != null) {
+                tasks.forEach(task -> {
+                 task.setName(taskDTO.getName());
+                });
+                existingEvent.setSummary(taskDTO.getName());
+          }
+          if (taskDTO.getDescription() != null) {
+                tasks.forEach(task -> {
+                 task.setDescription(taskDTO.getDescription());
+                });
+                existingEvent.setDescription(taskDTO.getDescription());
+          }
+          if (taskDTO.getStartDate() != null) {
+                tasks.forEach(task -> {
+                 task.setStartDate(taskDTO.getStartDate());
+                });
+                existingEvent.setStart(new EventDateTime().setDateTime(new DateTime(taskDTO.getStartDate().toString())));
+          }
+          if (taskDTO.getEndDate() != null) {
+                tasks.forEach(task -> {
+                 task.setEndDate(taskDTO.getEndDate());
+                });
+                existingEvent.setEnd(new EventDateTime().setDateTime(new DateTime(taskDTO.getEndDate().toString())));
+          }
+
+          taskRepository.saveAll(tasks);
+          googleCalendarService.updateEvent(tasks.get(0).getEventId(), existingEvent);
+          return TaskMapper.INSTANCE.taskToTaskDTO(tasks.get(0));
+     }
+
+    public void deleteTask(Long id) throws IOException {
+        Task task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+
         taskRepository.deleteById(id);
+        googleCalendarService.deleteEvent(task.getEventId());
+
+        taskRepository.deleteById(id);
+    }
+
+    public void deleteTasksByName(String name){
+        List<Task> tasks = taskRepository.findByName(name);
+        tasks.forEach(task -> {
+            try {
+                googleCalendarService.deleteEvent(task.getEventId());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            taskRepository.delete(task);
+        });
+
+    }
+
+    public void deleteAllTasks() {
+        Iterable<Task> tasks = taskRepository.findAll();
+        tasks.forEach(task -> {
+            try {
+                googleCalendarService.deleteEvent(task.getEventId());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            taskRepository.delete(task);
+        });
     }
 
 
