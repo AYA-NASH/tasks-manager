@@ -58,5 +58,6 @@ build/
 .vscode/
 
 # Ignore credential and service account key JSON files
-src/main/resources/credential.json
+src/main/resources/credentials.json
 src/main/resources/service-account-key.json
+src/main/resources/application.properties
