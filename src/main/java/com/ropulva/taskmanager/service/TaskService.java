@@ -5,23 +5,26 @@ import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.EventDateTime;
 import com.ropulva.taskmanager.controller.dto.TaskDTO;
 import com.ropulva.taskmanager.mappers.TaskMapper;
+import com.ropulva.taskmanager.repository.EventRepository;
 import com.ropulva.taskmanager.repository.TaskRepository;
 import com.ropulva.taskmanager.repository.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class TaskService {
-
+    private final EventRepository eventRepository;
     private final TaskRepository taskRepository;
     private final GoogleCalendarService googleCalendarService;
 
     @Autowired
-    public TaskService(TaskRepository taskRepository, GoogleCalendarService googleCalendarService) {
+    public TaskService(EventRepository eventRepository, TaskRepository taskRepository, GoogleCalendarService googleCalendarService) {
+        this.eventRepository = eventRepository;
         this.taskRepository = taskRepository;
         this.googleCalendarService = googleCalendarService;
     }
@@ -43,8 +46,12 @@ public class TaskService {
 
         taskEvent.setSummary(task.getName());
         taskEvent.setDescription(task.getDescription());
-        taskEvent.setStart(new EventDateTime().setDateTime(new DateTime(task.getStartDate().toString())));
-        taskEvent.setEnd(new EventDateTime().setDateTime(new DateTime(task.getEndDate().toString())));
+
+        DateTime startDateTime = new DateTime(task.getStartDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
+        DateTime endDateTime = new DateTime(task.getEndDate().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli());
+
+        taskEvent.setStart(new EventDateTime().setDateTime(new DateTime(String.valueOf(startDateTime))));
+        taskEvent.setEnd(new EventDateTime().setDateTime(new DateTime(String.valueOf(endDateTime))));
 
         googleCalendarService.createEvent(taskEvent);
 

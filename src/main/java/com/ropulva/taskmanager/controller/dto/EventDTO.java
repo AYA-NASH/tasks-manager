@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class EventDTO {
 
-    private Long id;
+    private String id;
 
 
     @JsonProperty("owner")

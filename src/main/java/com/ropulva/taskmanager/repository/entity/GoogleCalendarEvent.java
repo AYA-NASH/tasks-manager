@@ -14,8 +14,7 @@ import java.time.LocalDateTime;
 @Table(name = "GoogleCalendarEvent")
 public class GoogleCalendarEvent {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     @Column(name = "owner")
     private String owner;
